@@ -1,4 +1,5 @@
 import {Injectable} from "@nestjs/common";
+import {rules} from "@typescript-eslint/eslint-plugin";
 
 @Injectable()
 export class CurrencyService {
@@ -7,4 +8,9 @@ export class CurrencyService {
     get currencyPairs(): Array<string> {
         return this.currencyPairsList;
     }
+
+    get randomPair(): string {
+        return this.currencyPairsList[Math.floor(Math.random() * this.currencyPairsList.length)]
+    }
+
 }

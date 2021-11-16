@@ -22,6 +22,11 @@ import {OrderStatusDto} from "../request-dto/order-status.dto";
 import {OrderStatusEnum} from "../enum/order-status.enum";
 import {Transaction} from "../models/transaction.model";
 import {BuyDto} from "../request-dto/buy.dto";
+import {SellDto} from "../request-dto/sell.dto";
+import {IsNotEmpty, Max} from "class-validator";
+import {WithdrawalRequestsTypeEnum} from "../enum/withdrawal-requests-type.enum";
+import {WithdrawalOpenDto} from "../request-dto/withdrawal-open.dto";
+import {WithdrawalRequestsStatusEnum} from "../enum/withdrawal-requests-status.enum";
 
 @Controller()
 export class BitstampController {
@@ -489,7 +494,7 @@ export class BitstampController {
     @Post('buy/market/{currency_pair}')
     buyMarket(
         @Param('currency_pair', CurrenciesPairPipe) currency_pair: string,
-        @Body('amount') amount:number
+        @Body('amount') amount: number
     ) {
 
         return {
@@ -504,7 +509,7 @@ export class BitstampController {
     @Post('/instant/{currency_pair}/')
     instant(
         @Param('currency_pair', CurrenciesPairPipe) currency_pair: string,
-        @Body('amount') amount:number
+        @Body('amount') amount: number
     ) {
 
         return {
@@ -517,503 +522,811 @@ export class BitstampController {
     }
 
     @Post('/sell/{currency_pair}/')
-    sell() {
-
+    sell(
+        @Param('currency_pair', CurrenciesPairPipe) currency_pair: string,
+        @Body() sellDto: SellDto
+    ) {
+        return {
+            id: 9,
+            datetime: new Date(),
+            type: this.randomEnum(OrderType),
+            price: 12,
+            amount: 23
+        }
     }
 
     @Post('/sell/market/{currency_pair}/')
-    sellMarket() {
-
+    sellMarket(
+        @Param('currency_pair', CurrenciesPairPipe) currency_pair: string,
+        @Body('amount') amount: number
+    ) {
+        return {
+            id: 9,
+            datetime: new Date(),
+            type: this.randomEnum(OrderType),
+            price: 12,
+            amount: 23
+        }
     }
 
     @Post('/sell/instant/{currency_pair}/')
-    sellInstant() {
+    sellInstant(
+        @Param('currency_pair', CurrenciesPairPipe) currency_pair: string,
+        @Body('amount') amount: number
+    ) {
+        return {
+            id: 9,
+            datetime: new Date(),
+            type: this.randomEnum(OrderType),
+            price: 12,
+            amount: 23
+        }
 
     }
 
     @Post('/withdrawal-requests/')
-    withdrawalRequests() {
-
+    withdrawalRequests(
+        @Max(50000000) @Body('timedelta') timedelta: number
+    ) {
+        return {
+            id: 5,
+            datetime: new Date(),
+            type: this.randomEnum(WithdrawalRequestsTypeEnum),
+            currency: 'usd',
+            amount: 5,
+            status: this.randomEnum(WithdrawalRequestsTypeEnum),
+        }
     }
 
     @Post('btc_withdrawal')
-    btcWithdrawal() {
-
+    btcWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('eth_withdrawal')
-    ethWithdrawal() {
-
+    ethWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('ltc_withdrawal')
-    ltcWithdrawal() {
-
+    ltcWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('pax_withdrawal')
-    paxWithdrawal() {
-
+    paxWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('xlm_withdrawal')
-    xlmWithdrawal() {
-
+    xlmWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
+
 
     @Post('xrp_withdrawal')
-    xrpWithdrawal() {
-
+    xrpWithdrawal(
+        @IsNotEmpty()
+        @Body('amount') amount: number,
+        @IsNotEmpty()
+        @Body('address') address: string,
+        @Body('memo_id ') memo_id: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
-    @Post('link_withdrawal')
-    linkWithdrawal() {
 
+    @Post('link_withdrawal')
+    linkWithdrawal(
+        @IsNotEmpty()
+        @Body('amount') amount: number,
+        @IsNotEmpty()
+        @Body('address') address: string,
+        @Body('destination_tag') destination_tag: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('omg_withdrawal')
-    omgWithdrawal() {
-
+    omgWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('usdc_withdrawal')
-    usdcWithdrawal() {
-
+    usdcWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('aave_withdrawal')
-    aaveWithdrawal() {
-
+    aaveWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('bat_withdrawal')
-    batWithdrawal() {
-
+    batWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
-    @Post('uma_withdrawal')
-    umaWithdrawal() {
 
+    @Post('uma_withdrawal')
+    umaWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('dai_withdrawal')
-    daiWithdrawal() {
-
+    daiWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
-    @Post('knc_withdrawal')
-    kncWithdrawal() {
 
+    @Post('knc_withdrawal')
+    kncWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('mkr_withdrawal')
-    mkrWithdrawal() {
-
+    mkrWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('zrx_withdrawal')
-    zrxWithdrawal() {
-
+    zrxWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('gusd_withdrawal')
-    gusdWithdrawal() {
-
+    gusdWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('algo_withdrawal')
-    algoWithdrawal() {
-
+    algoWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('audio_withdrawal')
-    audioWithdrawal() {
-
+    audioWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('crv_withdrawal')
-    crvWithdrawal() {
-
+    crvWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('snx_withdrawal')
-    snxWithdrawal() {
-
+    snxWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('uni_withdrawal')
-    uniWithdrawal() {
-
+    uniWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('yfi_withdrawal')
-    yfiWithdrawal() {
-
+    yfiWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('comp_withdrawal')
-    compWithdrawal() {
-
+    compWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('grt_withdrawal')
-    grtWithdrawal() {
-
+    grtWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('usdt_withdrawal')
-    usdtWithdrawal() {
-
+    usdtWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('eurt_withdrawal')
-    eurtWithdrawal() {
-
+    eurtWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('matic_withdrawal')
-    maticWithdrawal() {
-
+    maticWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
+
 
     @Post('sushi_withdrawal')
-    sushiWithdrawal() {
-
+    sushiWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
+
 
     @Post('chz_withdrawal')
-    chzWithdrawal() {
-
+    chzWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
+
 
     @Post('enj_withdrawal')
-    enjWithdrawal() {
-
+    enjWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+        @Body('memo_id') memo_id: string,
+    ) {
+        return {
+            id: 6
+        }
     }
+
 
     @Post('hbar_withdrawal')
-    hbarWithdrawal() {
-
+    hbarWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
+
 
     @Post('alpha_withdrawal')
-    alphaWithdrawal() {
-
+    alphaWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
+
 
     @Post('axs_withdrawal')
-    axsWithdrawal() {
-
+    axsWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
-    @Post('ftt_withdrawal')
-    fttWithdrawal() {
 
+    @Post('ftt_withdrawal')
+    fttWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('sand_withdrawal')
-    sandWithdrawal() {
-
+    sandWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('storj_withdrawal')
-    storjWithdrawal() {
-
+    storjWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('fet_withdrawal')
-    fetWithdrawal() {
-
+    fetWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('rgt_withdrawal')
-    rgtWithdrawal() {
-
+    rgtWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('skl_withdrawal')
-    sklWithdrawal() {
-
+    sklWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('cel_withdrawal')
-    celWithdrawal() {
-
+    celWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('sxp_withdrawal')
-    sxpWithdrawal() {
-
+    sxpWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('ripple_withdrawal')
-    rippleWithdrawal() {
-
+    rippleWithdrawal(
+        @Body('amount') amount: number,
+        @Body('address') address: string,
+        @Body('currency') currency: string,
+    ) {
+        return {
+            id: 6
+        }
     }
 
     @Post('bch_address')
     bchAddress() {
-
+        return uuid.v4()
     }
 
     @Post('btc_address')
     btcAddress() {
-
+        return uuid.v4()
     }
 
     @Post('eth_address')
     ethAddress() {
-
+        return uuid.v4()
     }
 
     @Post('ltc_address')
     ltcAddress() {
-
+        return uuid.v4()
     }
 
     @Post('pax_address')
     paxAddress() {
-
+        return uuid.v4()
     }
 
     @Post('xlm_address')
     xlmAddress() {
-
+        return uuid.v4()
     }
 
     @Post('xrp_address')
     xrpAddress() {
-
+        return uuid.v4()
     }
 
     @Post('link_address')
     linkAddress() {
-
+        return uuid.v4()
     }
 
     @Post('omg_address')
     omgAddress() {
-
+        return uuid.v4()
     }
 
     @Post('usdc_address')
     usdcAddress() {
-
+        return uuid.v4()
     }
 
     @Post('aave_address')
     aaveAddress() {
-
+        return uuid.v4()
     }
 
     @Post('bat_address')
     batAddress() {
-
+        return uuid.v4()
     }
 
     @Post('uma_address')
     umaAddress() {
-
+        return uuid.v4()
     }
 
     @Post('dai_address')
     daiAddress() {
-
+        return uuid.v4()
     }
 
     @Post('knc_address')
     kncAddress() {
-
+        return uuid.v4()
     }
 
     @Post('mkr_address')
     mkrAddress() {
-
+        return uuid.v4()
     }
 
     @Post('zrx_address')
     zrxAddress() {
-
+        return uuid.v4()
     }
 
     @Post('gusd_address')
     gusdAddress() {
-
+        return uuid.v4()
     }
 
     @Post('algo_address')
     algoAddress() {
-
+        return uuid.v4()
     }
 
     @Post('audio_address')
     audioAddress() {
-
+        return uuid.v4()
     }
 
     @Post('crv_address')
     crvAddress() {
-
+        return uuid.v4()
     }
 
     @Post('snx_address')
     snxAddress() {
-
+        return uuid.v4()
     }
 
     @Post('uni_address')
     uniAddress() {
-
+        return uuid.v4()
     }
 
     @Post('yfi_address')
     yfiAddress() {
-
+        return uuid.v4()
     }
 
     @Post('comp_address')
     compAddress() {
-
+        return uuid.v4()
     }
 
     @Post('grt_address')
     grtAddress() {
-
+        return uuid.v4()
     }
 
     @Post('usdt_address')
     usdtAddress() {
-
+        return uuid.v4()
     }
 
     @Post('eurt_address')
     eurtAddress() {
-
+        return uuid.v4()
     }
 
     @Post('matic_address')
     maticAddress() {
-
+        return uuid.v4()
     }
 
     @Post('sushi_address')
     sushiAddress() {
-
+        return uuid.v4()
     }
 
     @Post('chz_address')
     chzAddress() {
-
+        return uuid.v4()
     }
 
     @Post('enj_address')
     enjAddress() {
-
+        return uuid.v4()
     }
 
     @Post('hbar_address')
     hbarAddress() {
-
+        return uuid.v4()
     }
 
     @Post('alpha_address')
     alphaAddress() {
-
+        return uuid.v4()
     }
 
     @Post('axs_address')
     axsAddress() {
-
+        return uuid.v4()
     }
 
     @Post('ftt_address')
     fttAddress() {
-
+        return uuid.v4()
     }
 
     @Post('sand_address')
     sandAddress() {
-
+        return uuid.v4()
     }
 
     @Post('storj_address')
     storjAddress() {
-
+        return uuid.v4()
     }
 
     @Post('fet_address')
     fetAddress() {
-
+        return uuid.v4()
     }
 
     @Post('rgt_address')
     rgtAddress() {
-
+        return uuid.v4()
     }
 
     @Post('skl_address')
     sklAddress() {
-
+        return uuid.v4()
     }
 
     @Post('cel_address')
     celAddress() {
-
+        return uuid.v4()
     }
 
     @Post('sxp_address')
     sxpAddress() {
-
+        return uuid.v4()
     }
 
     @Post('ripple_address')
     rippleAddress() {
-
+        return uuid.v4()
     }
 
     @Post('btc_unconfirmed')
     btcUnconfirmed() {
-
+        return {
+            amount: 25,
+            address: 'cvxz',
+            confirmations: 8
+        }
     }
 
     @Post('transfer-to-main')
-    transferToMain() {
-
+    transferToMain(
+        @Body('amount') amount: number,
+        @Body('currency') currency: string,
+        @Body('subAccount') subAccount: string,
+    ) {
+        return {
+            status: 'ok'
+        }
     }
 
     @Post('transfer-from-main')
-    transferFromMain() {
-
+    transferFromMain(
+        @Body('amount') amount: number,
+        @Body('currency') currency: string,
+        @Body('subAccount') subAccount: string,
+    ) {
+        return {
+            status: 'ok'
+        }
     }
 
-    @Post('withdrawal/open/')
-    withdrawalOpen() {
-
+    @Post('withdrawal/open')
+    withdrawalOpen(
+        @Body() WithdrawalOpenDto: WithdrawalOpenDto
+    ) {
+        return {id: 564};
     }
 
     @Post('withdrawal/status/')
-    withdrawalStatus() {
-
+    withdrawalStatus(
+        @Body('id') id: string
+    ) {
+        return {
+            status: this.randomEnum(WithdrawalRequestsStatusEnum)
+        }
     }
 
     @Post('withdrawal/cancel')
-    withdrawalCancel() {
-
+    withdrawalCancel(
+        @Body('id') id: string
+    ) {
+        return {
+            id,
+            amount: 25,
+            currency: 'usd',
+            account_currency: 'btc',
+            type: this.randomEnum(WithdrawalRequestsTypeEnum)
+        }
     }
 
     @Post('liquidation_address/new')
-    liquidationAddressNew() {
-
+    liquidationAddressNew(
+        @IsNotEmpty()
+        @Body('liquidation_currency') liquidation_currency: string,
+        @IsNotEmpty()
+        @Body('address_format') address_format: string,
+    ) {
+        return {
+            address: uuid.v4()
+        }
     }
 
     @Post('liquidation_address/info/')
-    liquidation_addressInfo() {
-
+    liquidationAddressInfo(
+        @Body('address') address: string,
+    ) {
+        return {
+            address,
+            currency_pair:this.currencyService.randomPair,
+            transactions:[]
+        }
     }
-
-    @Post('websockets_token')
-    websocketsToken() {
-
-    }
-
 }
