@@ -566,7 +566,7 @@ export class BitstampController {
 
     @Post('/withdrawal-requests/')
     withdrawalRequests(
-        @Max(50000000) @Body('timedelta') timedelta: number
+        @Body('timedelta') timedelta: number
     ) {
         return {
             id: 5,
@@ -631,9 +631,7 @@ export class BitstampController {
 
     @Post('xrp_withdrawal')
     xrpWithdrawal(
-        @IsNotEmpty()
         @Body('amount') amount: number,
-        @IsNotEmpty()
         @Body('address') address: string,
         @Body('memo_id ') memo_id: string,
     ) {
@@ -645,9 +643,7 @@ export class BitstampController {
 
     @Post('link_withdrawal')
     linkWithdrawal(
-        @IsNotEmpty()
         @Body('amount') amount: number,
-        @IsNotEmpty()
         @Body('address') address: string,
         @Body('destination_tag') destination_tag: string,
     ) {
@@ -1309,9 +1305,7 @@ export class BitstampController {
 
     @Post('liquidation_address/new')
     liquidationAddressNew(
-        @IsNotEmpty()
         @Body('liquidation_currency') liquidation_currency: string,
-        @IsNotEmpty()
         @Body('address_format') address_format: string,
     ) {
         return {
